@@ -14,5 +14,4 @@ def emotion_detector(text_to_analyse:str)->str:
     # Return the response text from the API
     formatted_response=response.json()
     emotions=formatted_response['emotionPredictions'][0]['emotion']
-    for emotion, value in emotions.items():
-        print(f"{emotion}:{value}")
+    return emotions
