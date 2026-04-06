@@ -13,7 +13,15 @@ def home():
 def detect_emotion():
     text_to_analyze = request.args.get("textToAnalyze")
 
+    # 🔴 Handle blank input
+    if not text_to_analyze or text_to_analyze.strip() == "":
+        return "Invalid text! Please try again!", 400
+
     result = emotion_detector(text_to_analyze)
+
+    # 🔴 Handle case where all values are None
+    if all(value is None for value in result.values()):
+        return "Invalid text! Please try again!", 400
 
     max_emotion = max(result, key=result.get)
 
@@ -31,4 +39,4 @@ def detect_emotion():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
